@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Players - PES Tracker{% endblock %}
+
+{% block content %}
+
+  <div class="card">
+    <h2>Add Player</h2>
+    <p class="muted">Add a new gamer to the system.</p>
+
+    <input type="text" id="playerName" placeholder="Enter player name">
+
+    <button class="btn btn-primary" type="button" onclick="addPlayer()">
+      ➕ Add Player
+    </button>
+
+    <p id="message" class="muted" style="margin-top:10px;"></p>
+  </div>
+
+  <div class="card">
+    <h2>Edit Player Name</h2>
+    <p class="muted">
+      Fix spelling mistakes. This does not affect match history.
+    </p>
+
+    <label class="muted">Select Player</label>
+    <select id="editPlayerSelect"></select>
+
+    <label class="muted">Correct Name</label>
+    <input type="text" id="newPlayerName" placeholder="Enter correct name">
+
+    <button class="btn btn-primary" type="button" onclick="editPlayer()">
+      ✏ Update Name
+    </button>
+
+    <p id="editMessage" class="muted" style="margin-top:10px;"></p>
+  </div>
+
+  <script>
+    async function addPlayer() {
+      const name = document.getElementById("playerName").value.trim();
+      const msg = document.getElementById("message");
+
+      msg.innerText = "";
+      msg.className = "muted";
+
+      if (!name) {
+        msg.className = "error";
+        msg.innerText = "Please enter a player name.";
+        return;
+      }
+
+      const response = await fetch(`/players/?name=${encodeURIComponent(name)}`, {
+        method: "POST"
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        msg.className = "success";
+        msg.innerText = "Player added successfully.";
+        document.getElementById("playerName").value = "";
+        await loadPlayers();
+      } else {
+        msg.className = "error";
+        msg.innerText = data.detail || "Error adding player.";
+      }
+    }
+
+    async function loadPlayers() {
+      const response = await fetch("/players/");
+      const players = await response.json();
+
+      const dropdown = document.getElementById("editPlayerSelect");
+      dropdown.innerHTML = "";
+
+      players.forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p.id;
+        opt.textContent = p.name;
+        dropdown.appendChild(opt);
+      });
+    }
+
+    async function editPlayer() {
+      const player_id = document.getElementById("editPlayerSelect").value;
+      const new_name = document.getElementById("newPlayerName").value.trim();
+      const editMsg = document.getElementById("editMessage");
+
+      editMsg.innerText = "";
+      editMsg.className = "muted";
+
+      if (!new_name) {
+        editMsg.className = "error";
+        editMsg.innerText = "Please enter the corrected name.";
+        return;
+      }
+
+      const response = await fetch(
+        `/players/edit?player_id=${player_id}&new_name=${encodeURIComponent(new_name)}`,
+        { method: "POST" }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        editMsg.className = "success";
+        editMsg.innerText = data.message;
+        document.getElementById("newPlayerName").value = "";
+        await loadPlayers();
+      } else {
+        editMsg.className = "error";
+        editMsg.innerText = data.detail || "Error updating player.";
+      }
+    }
+
+    loadPlayers();
+  </script>
+
+{% endblock %}
+
+
+

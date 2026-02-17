@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Head to Head - PES Tracker{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <h2>Head to Head</h2>
+    <p class="muted">Select two players to view their rivalry.</p>
+
+    <label class="muted">Player 1</label>
+    <select id="player1"></select>
+
+    <label class="muted">Player 2</label>
+    <select id="player2"></select>
+
+    <button class="btn btn-primary" onclick="getH2H()">View H2H</button>
+  </div>
+
+  <div id="result"></div>
+
+  <script>
+    async function loadPlayers() {
+      const response = await fetch("/players/");
+      const players = await response.json();
+
+      const p1 = document.getElementById("player1");
+      const p2 = document.getElementById("player2");
+
+      p1.innerHTML = "";
+      p2.innerHTML = "";
+
+      players.forEach(player => {
+        const opt1 = document.createElement("option");
+        opt1.value = player.id;
+        opt1.text = player.name;
+        p1.appendChild(opt1);
+
+        const opt2 = document.createElement("option");
+        opt2.value = player.id;
+        opt2.text = player.name;
+        p2.appendChild(opt2);
+      });
+    }
+
+    async function getH2H() {
+      const player1_id = document.getElementById("player1").value;
+      const player2_id = document.getElementById("player2").value;
+
+      const res = await fetch(`/h2h/?player1_id=${player1_id}&player2_id=${player2_id}`);
+      const data = await res.json();
+
+      const container = document.getElementById("result");
+      container.innerHTML = "";
+
+      if (data.message) {
+        container.innerHTML = `
+          <div class="card">
+            <p class="muted">${data.message}</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="card">
+          <h3>${data.player1_name} vs ${data.player2_name}</h3>
+
+          <div style="display:flex; justify-content:space-between; margin-top:12px;">
+            <div style="text-align:center; flex:1;">
+              <h1>${data.player1_wins}</h1>
+              <p class="muted">${data.player1_name} Wins</p>
+            </div>
+
+            <div style="text-align:center; flex:1;">
+              <h1>${data.draws}</h1>
+              <p class="muted">Draws</p>
+            </div>
+
+            <div style="text-align:center; flex:1;">
+              <h1>${data.player2_wins}</h1>
+              <p class="muted">${data.player2_name} Wins</p>
+            </div>
+          </div>
+
+          <hr style="border:0; border-top:1px solid #eee; margin:14px 0;">
+
+          <p class="muted">Total matches played: <strong>${data.total_matches}</strong></p>
+        </div>
+      `;
+    }
+
+    loadPlayers();
+  </script>
+{% endblock %}
+

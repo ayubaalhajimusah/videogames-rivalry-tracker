@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Recycle Bin - PES Tracker{% endblock %}
+
+{% block content %}
+
+  <div class="card">
+    <h2>Recycle Bin</h2>
+    <p class="muted">
+      Matches moved here are excluded from H2H and stats.
+      You can restore them anytime.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Deleted Matches</h3>
+
+    {% if matches %}
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Date</th>
+            <th>Player 1</th>
+            <th>Team</th>
+            <th>Score</th>
+            <th>Player 2</th>
+            <th>Team</th>
+            <th>Score</th>
+            <th>Restore</th>
+          </tr>
+
+          {% for m in matches %}
+          <tr>
+            <td>{{ m.date.strftime("%d/%m/%y %I:%M %p") if m.date else "" }}</td>
+
+            <td>{{ m.player1_name }}</td>
+            <td>{{ m.player1_team }}</td>
+            <td>{{ m.player1_score }}</td>
+
+            <td>{{ m.player2_name }}</td>
+            <td>{{ m.player2_team }}</td>
+            <td>{{ m.player2_score }}</td>
+
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary"
+                style="width:auto; padding:8px 12px;"
+                onclick="restoreMatch({{ m.id }})">
+                ♻ Restore
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+
+      <p class="muted" style="margin-top:10px;">
+        Restored matches will immediately reappear in All Matches and H2H.
+      </p>
+
+    {% else %}
+      <p class="muted">Recycle bin is empty.</p>
+    {% endif %}
+  </div>
+
+  <script>
+    async function restoreMatch(matchId) {
+      if (!confirm("Restore this match?")) return;
+
+      const res = await fetch(`/matches/restore?match_id=${matchId}`, {
+        method: "POST"
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(data.message);
+        location.reload();
+      } else {
+        alert(data.detail || "Error restoring match");
+      }
+    }
+  </script>
+
+{% endblock %}
+

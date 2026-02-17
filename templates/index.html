@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Home - PES Tracker{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <h2>Welcome 👋</h2>
+    <p class="muted">Record matches quickly, view H2H, and settle debates without arguments. brought to you by Tamale Zaa Musah.</p>
+  </div>
+
+  <div class="card">
+    <h3>Quick actions</h3>
+    <a href="/record-match"><button class="btn btn-primary">Record Match</button></a>
+    <a href="/h2h-page"><button class="btn btn-ghost">View Head-to-Head</button></a>
+    <a href="/feedback"><button class="btn btn-ghost">Send Feedback</button></a>
+  </div>
+
+  <div class="card">
+    <h3>Advanced</h3>
+    <a href="/bin"><button class="btn btn-ghost">Recycle Bin</button></a>
+  </div>
+{% endblock %}
+
+

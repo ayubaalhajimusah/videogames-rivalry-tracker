@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}PES Tracker{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    :root{
+      --bg:#0f1115;
+      --card:#ffffff;
+      --text:#111;
+      --muted:#6b7280;
+      --accent:#00c853;
+      --danger:#ff5252;
+      --border:#e5e7eb;
+      --shadow: 0 8px 24px rgba(0,0,0,.18);
+      --radius:16px;
+    }
+
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: white;
+    }
+
+    .app{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 16px;
+      padding-bottom: 88px; /* room for bottom nav on mobile */
+    }
+
+    /* Header */
+    .header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin: 8px 0 14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.3px;
+      font-size: 20px;
+    }
+
+    .pill{
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: rgba(255,255,255,.85);
+    }
+
+    /* Card */
+    .card{
+      background: var(--card);
+      color: var(--text);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      margin: 12px 0;
+      border: 1px solid rgba(0,0,0,.06);
+    }
+
+    .card h2, .card h3{
+      margin: 0 0 10px;
+    }
+
+    .muted{
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .success{ color: var(--accent); font-weight: 700; }
+.error{ color: var(--danger); font-weight: 700; }
+
+    /* Inputs / buttons */
+    input, select, textarea{
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      outline: none;
+      font-size: 16px;
+      box-sizing: border-box;
+      margin: 8px 0;
+      background: #fff;
+      color: #111;
+    }
+
+    textarea{ min-height: 120px; resize: vertical; }
+
+    .btn{
+      display:inline-block;
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn-primary{ background: var(--accent); color: white; }
+    .btn-danger{ background: var(--danger); color: white; }
+    .btn-ghost{
+  background: #f3f4f6;
+  color: #111;
+  border: 1px solid rgba(0,0,0,.12);
+}
+
+.btn-ghost:hover{
+  background: #e5e7eb;
+}
+
+
+    /* Table (desktop-friendly, scroll on mobile) */
+    .table-wrap{
+      overflow-x:auto;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+
+    table{
+      width:100%;
+      border-collapse: collapse;
+      min-width: 720px;
+      background:#fff;
+      color:#111;
+    }
+    th, td{
+      padding: 10px;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      text-align:center;
+      white-space: nowrap;
+    }
+    th{
+      background:#f3f4f6;
+      font-weight: 800;
+    }
+
+    /* Bottom nav */
+    .nav{
+      position: fixed;
+      left:0; right:0; bottom:0;
+      background: rgba(17,17,17,.92);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,.12);
+      padding: 10px 10px 12px;
+    }
+    .nav-inner{
+      max-width: 980px;
+      margin: 0 auto;
+      display:flex;
+      gap:10px;
+      justify-content: space-between;
+    }
+    .nav a{
+      flex:1;
+      text-decoration:none;
+      color: rgba(255,255,255,.85);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 10px 8px;
+      border-radius: 14px;
+      text-align:center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .nav a:hover{ background: rgba(255,255,255,.10); }
+
+    /* Desktop tweak: move nav to top-ish feel */
+    @media (min-width: 900px){
+      .app{ padding-bottom: 24px; }
+      .nav{
+        position: static;
+        background: transparent;
+        border: none;
+        padding: 0;
+        margin-top: 10px;
+      }
+      .nav a{
+        background: rgba(255,255,255,.08);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="header">
+      <div class="brand">⚽ PES Tracker</div>
+      <div class="pill">MVP • mobile friendly</div>
+    </div>
+
+    {% block content %}{% endblock %}
+  </div>
+
+  <div class="nav">
+    <div class="nav-inner">
+      <a href="/">🏠 Home</a>
+      <a href="/record-match">➕ Match</a>
+      <a href="/h2h-page">📊 H2H</a>
+      <a href="/all-matches">🗂 Matches</a>
+      <a href="/add-player">👤 Players</a>
+    </div>
+  </div>
+</body>
+</html>

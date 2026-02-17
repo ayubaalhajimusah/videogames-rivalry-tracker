@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Send Feedback</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background-color: #111;
+      color: white;
+      padding: 20px;
+    }
+
+    textarea {
+      width: 90%;
+      height: 140px;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 15px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px;
+      width: 90%;
+      background: #ff6d00;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    a {
+      display: block;
+      margin-top: 20px;
+      color: #ff6d00;
+      text-decoration: none;
+    }
+
+    #status {
+      margin-top: 15px;
+      color: #00e676;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Send Feedback</h2>
+
+  <textarea id="message" placeholder="Write your feedback here..."></textarea>
+
+  <button type="button" onclick="sendFeedback()">Submit Feedback</button>
+
+  <p id="status"></p>
+
+  <a href="/">⬅ Back Home</a>
+
+  <script>
+    async function sendFeedback() {
+      const message = document.getElementById("message").value.trim();
+
+      if (!message) {
+        alert("Please enter feedback before submitting.");
+        return;
+      }
+
+      const response = await fetch(`/feedback-submit?message=${encodeURIComponent(message)}`, {
+        method: "POST"
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        document.getElementById("status").innerText = data.message;
+        document.getElementById("message").value = "";
+      } else {
+        document.getElementById("status").innerText = "Something went wrong.";
+      }
+    }
+  </script>
+
+</body>
+</html>

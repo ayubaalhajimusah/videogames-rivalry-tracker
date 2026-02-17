@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}All Matches - PES Tracker{% endblock %}
+
+{% block content %}
+
+  <div class="card">
+    <h2>All Matches</h2>
+    <p class="muted">Filter matches by a player. You can also move wrong matches to the bin.</p>
+
+    <!-- Filter Form -->
+    <form method="get" action="/all-matches">
+      <label class="muted" for="player">Filter by Player</label>
+      <select name="player_id" id="player">
+        <option value="">-- All Players --</option>
+        {% for player in players %}
+          <option value="{{ player.id }}"
+            {% if selected_player and selected_player == player.id %}selected{% endif %}>
+            {{ player.name }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <button class="btn btn-primary" type="submit">Filter</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>Matches</h3>
+
+    {% if matches %}
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Date</th>
+            <th>Player 1</th>
+            <th>Team</th>
+            <th>Score</th>
+            <th>Player 2</th>
+            <th>Team</th>
+            <th>Score</th>
+            <th>Winner</th>
+            <th>Bin</th>
+          </tr>
+
+          {% for m in matches %}
+<tr>
+  <td>{{ m.date.strftime("%d/%m/%y %I:%M %p") if m.date else "" }}</td>
+
+  <td>{{ m.player1_name }}</td>
+  <td>{{ m.player1_team }}</td>
+  <td>{{ m.player1_score }}</td>
+
+  <td>{{ m.player2_name }}</td>
+  <td>{{ m.player2_team }}</td>
+  <td>{{ m.player2_score }}</td>
+
+  <!-- ✅ MODIFIED WINNER CELL -->
+  <td>
+    {{ m.outcome }}
+    {% if m.restored_at %}
+      <span style="
+        display:inline-block;
+        margin-left:8px;
+        padding:3px 8px;
+        border-radius:999px;
+        font-size:12px;
+        background:#fbbf24;
+        color:#111;
+        font-weight:800;
+      ">
+        Restored
+      </span>
+    {% endif %}
+  </td>
+
+  <td>
+    <button type="button"
+            class="btn btn-danger"
+            style="width:auto; padding:8px 10px;"
+            onclick="binMatch({{ m.id }})">
+      🗑 Bin
+    </button>
+  </td>
+</tr>
+{% endfor %}
+        </table>
+      </div>
+
+      <p class="muted" style="margin-top:10px;">
+        Tip: Binned matches won’t count in H2H/stats and can be restored from <strong>Recycle Bin</strong>.
+      </p>
+
+    {% else %}
+      <p class="muted">No matches found.</p>
+    {% endif %}
+  </div>
+
+  <script>
+    async function binMatch(matchId) {
+      if (!confirm("Move this match to bin?")) return;
+
+      const res = await fetch(`/matches/bin?match_id=${matchId}`, { method: "POST" });
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(data.message);
+        location.reload();
+      } else {
+        alert(data.detail || "Error moving match to bin");
+      }
+    }
+  </script>
+
+{% endblock %}
+
+

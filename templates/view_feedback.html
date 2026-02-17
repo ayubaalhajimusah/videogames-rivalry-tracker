@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Feedback</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #111;
+      color: white;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .feedback {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .date {
+      font-size: 12px;
+      color: #aaa;
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: #ff6d00;
+      text-decoration: none;
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>📬 User Feedback</h2>
+
+  {% if feedbacks %}
+    {% for fb in feedbacks %}
+      <div class="feedback">
+        <div class="date">
+          {{ fb.created_at.strftime("%d/%m/%Y %I:%M %p") }}
+        </div>
+        <div>{{ fb.message }}</div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No feedback yet.</p>
+  {% endif %}
+
+  <a href="/">⬅ Back Home</a>
+
+</body>
+</html>
