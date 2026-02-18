@@ -1,35 +1,104 @@
-# PES H2H Tracker ⚽
+# 🎮 Video Games Rivalry Tracker (PES / FIFA H2H)
 
-A simple mobile-friendly MVP web app for tracking PES/FIFA match results and Head-to-Head (H2H) stats among friends.
+A simple, mobile-friendly web app for tracking head-to-head (H2H) results between gamers who play PES or FIFA regularly.
 
-## Why this exists
-Friends play many games and later argue about who leads the head-to-head. This app keeps records clearly and fairly.
+Built as a Minimum Viable Product (MVP) to solve a real problem:  
+**“Who is actually winning after weeks or months of playing?”**
 
-## Features (MVP)
-- Add players
-- Record matches (players, teams used, scores, timestamp)
-- View Head-to-Head (H2H) stats between any two players
-- View all matches with filtering
-- Soft delete matches (Recycle Bin) + restore
-- Feedback page for user suggestions
-- “Restored” badge for transparency when a binned match is restored
+---
 
-## Tech Stack
-- FastAPI (Python)
-- SQLite + SQLAlchemy
-- Jinja2 Templates (server-rendered pages)
-- Vanilla JavaScript (fetch API)
-- Mobile-first CSS UI (simple app-like UI)
+## Live Demo
+👉 https://videogames-rivalry-tracker.onrender.com
 
-## Future Improvements
-- User accounts / roles
-- Leaderboards + streaks
-- Export results to CSV
-- Multi-group support (different friend circles)
+>  Warning: The app uses SQLite on a free Render instance. Data may reset on redeploy.
 
-## Run Locally (Windows)
+---
+
+## Why This Project?
+
+When friends play PES/FIFA frequently, keeping track of:
+- wins
+- draws
+- head-to-head records  
+often leads to arguments and forgotten results.
+
+This app provides:
+- a neutral record keeper
+- transparent stats
+- a simple UI usable on phones and computers
+
+---
+
+## Features
+
+### 👥 Player Management
+- Add new gamers dynamically
+- Edit player names (fix spelling without breaking match history)
+
+### ⚽ Match Recording
+- Select Player A vs Player B
+- Record scores and teams used
+- Automatic timestamping
+
+### Head-to-Head (H2H) Stats
+- Total matches
+- Wins per player
+- Draws
+- Clean, easy-to-read output
+
+### 🗑 Soft Delete + Restore
+- Mistaken matches can be moved to a recycle bin
+- Deleted matches do **not** count in stats
+- Restored matches are visibly tagged as **“Restored”**
+
+### 📝 Feedback System
+- Users can submit feedback directly in-app
+- Designed to guide future improvements
+
+### 📱 Responsive UI
+- Works smoothly on desktop and mobile
+- Clean, app-like interface
+
+---
+
+## 🛠 Tech Stack
+
+- **Backend:** FastAPI (Python)
+- **Database:** SQLite (SQLAlchemy ORM)
+- **Frontend:** HTML, CSS, Vanilla JavaScript
+- **Templating:** Jinja2
+- **Deployment:** Render
+- **Version Control:** Git & GitHub
+
+---
+
+## ▶️ Run Locally
+
+### 1️⃣ Clone the repository
 ```bash
-python -m venv venv
-venv\Scripts\Activate
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8001
+git clone https://github.com/ayubaalhajimusah/videogames-rivalry-tracker.git
+cd videogames-rivalry-tracker
+
+
+## 📸 Screenshots
+
+### Home
+![Home](screenshots/home.png)
+
+### Record Match
+![Record Match](screenshots/record_match.png)
+
+### All Matches
+![All Matches](screenshots/all_matches.png)
+
+### Head-to-Head (H2H)
+![H2H](screenshots/h2h.png)
+
+### Recycle Bin
+![Recycle Bin](screenshots/recycle_bin.png)
+
+### Add Player
+![Add Player](screenshots/add_player.png)
+
+### Feed Back
+![Feed Back](screenshots/feed_back.png)
