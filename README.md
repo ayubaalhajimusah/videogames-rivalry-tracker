@@ -82,8 +82,6 @@ cd videogames-rivalry-tracker
 
 ## 📸 Screenshots
 
-## 📸 Screenshots
-
 ### Home
 ![Home](https://raw.githubusercontent.com/ayubaalhajimusah/videogames-rivalry-tracker/main/screenshots/home.png)
 
