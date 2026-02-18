@@ -80,6 +80,7 @@ git clone https://github.com/ayubaalhajimusah/videogames-rivalry-tracker.git
 cd videogames-rivalry-tracker
 
 
+```md
 ## 📸 Screenshots
 
 ### Home
