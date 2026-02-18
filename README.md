@@ -77,10 +77,10 @@ This app provides:
 ### 1️⃣ Clone the repository
 ```bash
 git clone https://github.com/ayubaalhajimusah/videogames-rivalry-tracker.git
-cd videogames-rivalry-tracker
+cd videogames-rivalry-tracker 
+```
 
 
-```md
 ## 📸 Screenshots
 
 ### Home
