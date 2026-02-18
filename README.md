@@ -82,23 +82,25 @@ cd videogames-rivalry-tracker
 
 ## 📸 Screenshots
 
+## 📸 Screenshots
+
 ### Home
-![Home](screenshots/home.png)
+![Home](https://raw.githubusercontent.com/ayubaalhajimusah/videogames-rivalry-tracker/main/screenshots/home.png)
 
 ### Record Match
-![Record Match](screenshots/record_match.png)
+![Record Match](https://raw.githubusercontent.com/ayubaalhajimusah/videogames-rivalry-tracker/main/screenshots/record_match.png)
 
 ### All Matches
-![All Matches](screenshots/all_matches.png)
+![All Matches](https://raw.githubusercontent.com/ayubaalhajimusah/videogames-rivalry-tracker/main/screenshots/all_matches.png)
 
 ### Head-to-Head (H2H)
-![H2H](screenshots/h2h.png)
+![H2H](https://raw.githubusercontent.com/ayubaalhajimusah/videogames-rivalry-tracker/main/screenshots/h2h.png)
 
 ### Recycle Bin
-![Recycle Bin](screenshots/recycle_bin.png)
+![Recycle Bin](https://raw.githubusercontent.com/ayubaalhajimusah/videogames-rivalry-tracker/main/screenshots/recycle_bin.png)
 
 ### Add Player
-![Add Player](screenshots/add_player.png)
+![Add Player](https://raw.githubusercontent.com/ayubaalhajimusah/videogames-rivalry-tracker/main/screenshots/add_player.png)
 
-### Feed Back
-![Feed Back](screenshots/feed_back.png)
+### Feedback
+![Feedback](https://raw.githubusercontent.com/ayubaalhajimusah/videogames-rivalry-tracker/main/screenshots/feedback.png)
