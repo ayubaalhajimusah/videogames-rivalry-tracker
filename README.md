@@ -103,3 +103,12 @@ cd videogames-rivalry-tracker
 
 ### Feedback
 ![Feedback](https://raw.githubusercontent.com/ayubaalhajimusah/videogames-rivalry-tracker/main/screenshots/feedback.png)
+
+### Future Improvements
+
+- Leaderboard & winning streaks
+- Export stats to CSV
+- Multi-group support (different friend circles)
+
+### 👤 Author
+- AYUBA ALHAJI MUSAH
